@@ -32,6 +32,11 @@
     --grid-column-gap: var(--space-m);
   }
 
+  &.isHorizontal.asixSizeM.isBackgroundBarChart {
+    --grid-row-gap: var(--space-s);
+    --grid-column-gap: var(--space-m);
+  }
+
   &.isHorizontal {
     padding-right: var(--space-m);
   }

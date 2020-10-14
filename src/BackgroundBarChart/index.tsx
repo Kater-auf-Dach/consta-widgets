@@ -53,6 +53,7 @@ export const BackgroundBarChart: React.FC<Props> = props => {
   return (
     <CoreBarChart
       {...rest}
+      isBackgroundBarChart
       size="m"
       groups={commonGroups}
       valuesDomain={valuesDomain}

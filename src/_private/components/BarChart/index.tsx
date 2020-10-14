@@ -55,6 +55,7 @@ export type Props<T> = {
   valuesTicks: number
   size: Size
   isHorizontal?: boolean
+  isBackgroundBarChart?: boolean
   showValues?: boolean
   showReversed?: boolean
   isXAxisLabelsSlanted?: boolean
@@ -135,6 +136,7 @@ export const CoreBarChart = <T,>(props: Props<T>) => {
     isXAxisLabelsSlanted,
     onMouseEnterColumn,
     onMouseLeaveColumn,
+    isBackgroundBarChart,
   } = props
   const ref = useRef<HTMLDivElement>(null)
   const svgRef = useRef(null)
@@ -264,6 +266,7 @@ export const CoreBarChart = <T,>(props: Props<T>) => {
         css.main,
         isHorizontal && css.isHorizontal,
         isDense && css.isDense,
+        isBackgroundBarChart && css.isBackgroundBarChart,
         size && axisSizeClasses[toAxisSize(columnSize)],
         columnSizeClasses[columnSize]
       )}
