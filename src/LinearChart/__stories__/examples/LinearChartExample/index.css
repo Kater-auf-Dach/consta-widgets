@@ -1,0 +1,20 @@
+.main {
+  width: 300px;
+  height: 150px;
+  margin-top: var(--space-l);
+  margin-bottom: var(--space-l);
+}
+
+.threshold {
+  width: 700px;
+  height: 300px;
+  margin-top: var(--space-l);
+  margin-bottom: var(--space-l);
+}
+
+.boundaries {
+  width: 600px;
+  height: 300px;
+  margin-top: var(--space-l);
+  margin-bottom: var(--space-l);
+}
