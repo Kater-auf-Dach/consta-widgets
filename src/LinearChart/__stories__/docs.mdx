@@ -1,0 +1,58 @@
+
+
+# LinearChart
+
+Документация
+
+
+## Свойства
+
+<!-- props:start -->
+
+directionX?: DirectionX
+directionY?: DirectionY
+lines: readonly Line[]
+gridConfig: GridConfig
+threshold?: Threshold
+withZoom?: boolean
+isHorizontal: boolean
+formatValueForLabel?: FormatValue
+formatValueForTooltip?: FormatValue
+formatValueForTooltipTitle?: FormatValue
+unit?: string
+title?: React.ReactNode
+onClickHoverLine?: (value: number) => void
+background?: string
+} & (
+| {
+    boundaries?: never
+  }
+| {
+    boundaries: readonly Boundary[]
+    boundariesAxis: Axis
+    showBoundariesOnAxis: boolean
+  }
+)
+
+| Свойство          | Тип      | По умолчанию | Описание |
+| ----------------- | -------- | ------------ | -------- |
+| [`lines`](#ссылка) | `Line[]` | -            | Описание |
+| [`gridConfig`](#ссылка) | `GridConfig` | -            | Описание |
+| [`lines`](#ссылка) | `Line[]` | -            | Описание |
+| [`lines`](#ссылка) | `Line[]` | -            | Описание |
+| `prop`            | `string` | -            | Описание |
+
+```tsx
+export const SimpleExample = () => (
+  <div className={classnames(css.main)}>
+    <BackgroundBarChart
+      groups={groups}
+      gridTicks={4}
+      valuesTicks={1}
+      isHorizontal={true}
+      showValues={false}
+      align="start"
+    />
+  </div>
+)
+```
