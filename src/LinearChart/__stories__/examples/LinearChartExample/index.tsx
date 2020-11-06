@@ -72,18 +72,6 @@ export const LinearChartExampleFormatLabelProcent = () => (
   </div>
 )
 
-export const LinearChartExampleNotHorizontal = () => (
-  <div className={classnames(css.main)}>
-    <LinearChart
-      title="Очень красивый график"
-      lines={linesSimple}
-      gridConfig={gridConfigSimple}
-      unit="км"
-      background="linear-gradient(to right, #f54d4d48, transparent)"
-    />
-  </div>
-)
-
 export const LinearChartExampleLabel = () => (
   <div className={classnames(css.main)}>
     <LinearChart
