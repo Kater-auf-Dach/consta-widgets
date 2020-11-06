@@ -2,7 +2,7 @@ import React from 'react'
 
 import classnames from 'classnames'
 
-import { axes, directionsX, directionsY, LinearChart } from '../../..'
+import { LinearChart } from '../../..'
 import {
   boundaries,
   gridConfigFormat,
@@ -136,7 +136,7 @@ export const LinearChartExampleDirectionYtoBottom = () => (
       lines={linesSimple}
       gridConfig={gridConfigSimple}
       isHorizontal
-      units="км"
+      unit="км"
     />
   </div>
 )
