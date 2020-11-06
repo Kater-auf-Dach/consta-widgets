@@ -3,46 +3,194 @@ import React from 'react'
 import classnames from 'classnames'
 
 import { axes, directionsX, directionsY, LinearChart } from '../../..'
+import {
+  boundaries,
+  gridConfigFormat,
+  gridConfigLabel,
+  gridConfigSimple,
+  linesBoundaries,
+  linesFormat,
+  linesNull,
+  linesSimple,
+  linesThreshold,
+  threshold,
+} from '../../data.mock'
 
 import css from './index.css'
 
-export const LinearChartExample = () => (
+export const LinearChartExampleGeneral = () => (
+  <div className={classnames(css.main)}>
+    <LinearChart
+      title="Название графика"
+      lines={linesSimple}
+      gridConfig={gridConfigSimple}
+      isHorizontal
+      unit="единицы"
+      background="linear-gradient(to right, #f54d4d48, transparent)"
+    />
+  </div>
+)
+
+export const LinearChartExampleFormatLabelTooltip = () => (
+  <div className={classnames(css.main)}>
+    <LinearChart
+      unit="км"
+      lines={linesFormat}
+      gridConfig={gridConfigFormat}
+      isHorizontal
+      formatValueForLabel={v => new Date(v).toLocaleDateString()}
+      formatValueForTooltip={v => `${v} км`}
+      formatValueForTooltipTitle={v => {
+        const title = new Date(v)
+          .toLocaleDateString('ru-RU', { month: 'long', year: 'numeric' })
+          .replace('г.', '')
+        return title[0].toUpperCase() + title.slice(1)
+      }}
+    />
+  </div>
+)
+
+export const LinearChartExampleFormatLabelData = () => (
+  <div className={classnames(css.main)}>
+    <LinearChart
+      lines={linesFormat}
+      gridConfig={gridConfigFormat}
+      isHorizontal
+      formatValueForLabel={v => new Date(v).toLocaleDateString()}
+    />
+  </div>
+)
+
+export const LinearChartExampleFormatLabelProcent = () => (
+  <div className={classnames(css.main)}>
+    <LinearChart
+      lines={linesSimple}
+      gridConfig={gridConfigSimple}
+      isHorizontal
+      formatValueForLabel={v => `${v} %`}
+    />
+  </div>
+)
+
+export const LinearChartExampleNotHorizontal = () => (
   <div className={classnames(css.main)}>
     <LinearChart
       title="Очень красивый график"
-      lines={[
-        {
-          values: [
-            { x: 1, y: 1 },
-            { x: 5, y: 3 },
-            { x: 7, y: 1 },
-            { x: 8, y: 2 },
-          ],
-          dots: true,
-          lineName: 'Северный бур',
-          withGradient: true,
-          color: 'var(--color-bg-success)',
-        },
-      ]}
-      gridConfig={{
-        x: {
-          labels: 'bottom',
-          labelTicks: 1,
-          gridTicks: 10,
-          guide: true,
-          withPaddings: false,
-        },
-        y: {
-          labels: 'left',
-          labelTicks: 1,
-          gridTicks: 4,
-          guide: true,
-          withPaddings: false,
-        },
-      }}
+      lines={linesSimple}
+      gridConfig={gridConfigSimple}
+      unit="км"
+      background="linear-gradient(to right, #f54d4d48, transparent)"
+    />
+  </div>
+)
+
+export const LinearChartExampleLabel = () => (
+  <div className={classnames(css.main)}>
+    <LinearChart
+      title="Очень красивый график"
+      lines={linesSimple}
+      gridConfig={gridConfigLabel}
+      isHorizontal
+      unit="км"
+    />
+  </div>
+)
+
+export const LinearChartExampleDirectionXtoLeft = () => (
+  <div className={classnames(css.main)}>
+    <LinearChart
+      directionX="toLeft"
+      lines={linesSimple}
+      gridConfig={gridConfigSimple}
+      isHorizontal
+    />
+  </div>
+)
+
+export const LinearChartExampleDirectionXtoRight = () => (
+  <div className={classnames(css.main)}>
+    <LinearChart
+      directionX="toRight"
+      lines={linesSimple}
+      gridConfig={gridConfigSimple}
+      isHorizontal
+    />
+  </div>
+)
+
+export const LinearChartExampleDirectionYtoTop = () => (
+  <div className={classnames(css.main)}>
+    <LinearChart
+      directionY="toTop"
+      lines={linesSimple}
+      gridConfig={gridConfigSimple}
+      isHorizontal
+    />
+  </div>
+)
+
+export const LinearChartExampleDirectionYtoBottom = () => (
+  <div className={classnames(css.main)}>
+    <LinearChart
+      directionY="toBottom"
+      lines={linesSimple}
+      gridConfig={gridConfigSimple}
       isHorizontal
       units="км"
-      background="linear-gradient(to right, #f54d4d48, transparent)"
+    />
+  </div>
+)
+
+export const LinearChartExampleNull = () => (
+  <div className={classnames(css.main)}>
+    <LinearChart lines={linesNull} gridConfig={gridConfigSimple} isHorizontal />
+  </div>
+)
+
+export const LinearChartExampleBoundaries = () => (
+  <div className={classnames(css.boundaries)}>
+    <LinearChart
+      lines={linesBoundaries}
+      gridConfig={gridConfigSimple}
+      boundaries={boundaries}
+      boundariesAxis="y"
+      showBoundariesOnAxis
+      isHorizontal
+    />
+  </div>
+)
+
+export const LinearChartExampleZoom = () => (
+  <div className={classnames(css.main)}>
+    <LinearChart
+      title="Очень красивый график"
+      lines={linesSimple}
+      gridConfig={gridConfigSimple}
+      isHorizontal
+      unit="км"
+      withZoom
+    />
+  </div>
+)
+
+export const LinearChartExampleThreshold = () => (
+  <div className={classnames(css.threshold)}>
+    <LinearChart
+      title="График с пороговыми значениями"
+      lines={linesThreshold}
+      gridConfig={gridConfigSimple}
+      threshold={threshold}
+      isHorizontal
+      unit="тыс. м3"
+      formatValueForLabel={v => new Date(v).toLocaleDateString()}
+      formatValueForTooltip={v => `${v} тыс м3`}
+      formatValueForTooltipTitle={v => {
+        const title = new Date(v)
+          .toLocaleDateString('ru-RU', { month: 'long', year: 'numeric' })
+          .replace('г.', '')
+        return title[0].toUpperCase() + title.slice(1)
+      }}
+      withZoom
     />
   </div>
 )
