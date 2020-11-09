@@ -1,0 +1,10 @@
+.main {
+  margin-top: var(--space-m);
+  margin-bottom: var(--space-m);
+}
+
+.small {
+  width: 300px;
+  margin-top: var(--space-m);
+  margin-bottom: var(--space-m);
+}

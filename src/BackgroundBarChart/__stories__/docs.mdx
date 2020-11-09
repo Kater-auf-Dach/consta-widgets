@@ -1,19 +1,242 @@
-import { SimpleExample } from './examples/SimpleExample'
+import {
+  BackgroundBarChartExample,
+  BackgroundBarChartPotatoExample,
+  BackgroundBarChartAnanasExample,
+  BackgroundBarFormatValueForLabel,
+  BackgroundBarChartShowValues,
+  BackgroundBarChartExampleTooltip,
+  BackgroundBarChartExampleTicks,
+  BackgroundBarChartExampleTicks2,
+  BackgroundBarChartExampleThreshold,
+  BackgroundBarChartExampleStart,
+  BackgroundBarChartExampleEnd,
+  BackgroundBarChartExampleVertical,
+  BackgroundBarChartExampleUnitLeft,
+  BackgroundBarChartExampleUnitNone,
+  BackgroundBarChartExampleUnitBottom,
+  BackgroundBarChartExampleUnitLeftBottom
+} from './examples/BackgroundBarChartExample'
 
 # BackgroundBarChart
 
-Документация
+Столбчатая диаграмма с фоном. Используется, если нужно сравнить несколько
+значений одного показателя и показать одновременно несколько групп значений.
 
-<SimpleExample />
+Например:
+
+- Фон — это цель, к которой мы стремимся,
+- а столбец сверху — то, чего мы достигли на самом деле.
+
+Или:
+
+- Фон — это норма,
+- столбец сверху — реальный показатель.
+
+И так далее.
+
+<BackgroundBarChartExample />
+
+
+ - [Группы и столбцы](#группы-и-столбцы)
+   - [Выделить группу](#группы-и-столбцы)
+   - [Значения у столбцов](#значения-у-столбцов)
+ - [Сетка](#сетка)
+   - [Сколько делений показывать](#сколько-делений-показывать)
+   - [Как часто](#как-часто)
+   - [Формат подписи к делениям](#формат-подписи-к-делениям)
+   - [Тултип](#тултип)
+ - [Предельные значения](#предельные-значения)
+ - [Свойства графика](#свойства-графика)
+    - [Выравнивание](#выравнивание)
+    - [Горизонтальный или вертикальный](#горизонтальный-или-вертикальный)
+    - [Единицы измерения](#единицы-измерения)
+ - [Список свойств](#свойства)
+ - [Пример использования](#пример)
+
+
+## Группы и столбцы
+
+Группы и их содержимое можно описать в объекте `groups`. В него входит:
+- Название группы — оно будет показываться на графике (задается в `groupName`).
+- Описание значений для столбцов, которые будут показываться в этой группе (задается в массиве `values`). Внутри:
+  - `value` — значение для столбца,
+  - `color` — цвет столбца,
+  - `name` — название столбца (видно в [тултипе](#тултип)).
+- описание значений для фона под столбцами в этой группе (задается в массиве `backgroundValues`). Внутри:
+  - `value` — значение для фона,
+  - `color` — цвет фона,
+  - `name` — название фона (видно в [тултипе](#тултип)).
+
+И столбец, и фон под ним могут состоять из нескольких частей.
+
+<BackgroundBarChartPotatoExample />
+
+```
+groupName: 'Картошка',
+values: [{ value: 22, color: 'var(--color-bg-normal)', name: 'Выросло' }],
+backgroundValues: [{ value: 22, 'var(--color-bg-normal)', name: 'В плане' }]
+```
+
+
+### Выделить группу
+
+Чтобы показать, что группа отличается от остальных, используйте `isDisabled`.
+
+<BackgroundBarChartAnanasExample />
+
+```
+groupName: 'Ананасы',
+values: [{ value: 3, color: 'var(--color-bg-alert)', name: 'Выросло' }],
+backgroundValues: [
+  { value: 43, color: 'var(--color-bg-normal)', name: 'В плане' },
+  { value: 3, color: 'repeating-linear-gradient(45deg, var(--color-bg-alert), var(--color-bg-alert) 2px, transparent 2px, transparent 4px, var(--color-bg-alert) 4px, var(--color-bg-alert) 6px)', name: 'Посадили что-то не то' },
+],
+isDisabled: true
+```
+
+
+### Значения у столбцов
+
+Чтобы показать значения рядом со столбцами, добавьте `showValues={true}`.
+Если столбец состоит из нескольких цветов, показывается сумма соответствующих значений.
+
+<BackgroundBarChartShowValues />
+
+
+## Сетка
+
+### Сколько делений показывать
+
+За количество делений на графике отвечает `gridTicks`.
+
+### Как часто
+
+Вы можете указать, как часто ставить подписи рядом с делениями: у каждого, у каждого второго, третьего и т. д.
+ За это отвечает `valuesTicks`.
+
+<BackgroundBarChartExampleTicks />
+
+```
+gridTicks={10} //показываем 10 делений на графике
+valuesTicks={1} //ставим подпись у каждого деления
+```
+
+<BackgroundBarChartExampleTicks2 />
+
+```
+gridTicks={4} //показываем 4 деления на графике
+valuesTicks={2} //ставим подпись у каждого второго деления
+```
+
+### Формат подписи к делениям
+
+Формат подписи указывается в `formatValueForLabel`, по умолчанию это число — номер деления,
+но вы можете показать что-то другое, например,  процент или дату.
+
+<BackgroundBarFormatValueForLabel />
+
+```
+formatValueForLabel={v => `${v} кг`}
+```
+
+### Тултип
+
+При наведении на столбец показывается тултип — всплывающее окно с дополнительной информацией об этом столбце.
+В нем видны названия название столбца, название фона под ним и значения.
+
+Вы можете поменять формат значения в тултипе (за это отвечает свойство `formatValueForTooltip`). Например, добавить к значению единицы измерения.
+
+<BackgroundBarChartExampleTooltip />
+
+```
+formatValueForTooltip={v => `${v} дыщ`}
+```
+
+## Предельные значения
+
+Вы можете описать область предельных значений в объекте `threshold`:
+ - в `value` укажите предельное значение,
+ - в `color` — цвет, которым его нужно обозначить.
+
+На графике появится пунктирная линия.
+
+<BackgroundBarChartExampleThreshold />
+
+```
+threshold: { value: 20, color: 'var(--color-bg-success)' }
+```
+
+## Свойства графика
+
+### Выравнивание
+
+За выравнивание столбцов отвечает свойство `align`.
+Варианты: `'start'` или `'end'` (по умолчанию `'start'`).
+
+| `align='start'`          | `align='end'`       |
+| ----------------- | -------- |
+| <BackgroundBarChartExampleStart /> | <BackgroundBarChartExampleEnd />  |
+
+
+
+### Горизонтальный или вертикальный
+
+По умолчанию график горизонтальный. Если вы укажете `isHorizontal={false}`,
+график повернется на 90 градусов вправо.
+
+<BackgroundBarChartExampleVertical />
+
+### Единицы измерения
+
+За единицы измерения отвечает свойство `unit`.
+
+Вы можете расположить их как удобно, за расположение единиц отвечает `unitPosition`.
+Варианты: `left`, `bottom`, `left-and-bottom`, `none`.
+
+| `unitPosition="left"`         | `unitPosition="bottom"`     |
+| ----------------- | -------- |
+| <BackgroundBarChartExampleUnitLeft /> | <BackgroundBarChartExampleUnitBottom /> |
+
+| `unitPosition="left-and-bottom"`         | `unitPosition="none"`     |
+| ----------------- | -------- |
+| <BackgroundBarChartExampleUnitLeftBottom /> | <BackgroundBarChartExampleUnitNone /> |
+
 
 ## Свойства
 
-<!-- props:start -->
 
 | Свойство          | Тип      | По умолчанию | Описание |
 | ----------------- | -------- | ------------ | -------- |
-| [`prop`](#ссылка) | `string` | -            | Описание |
-| `prop`            | `string` | -            | Описание |
+| [`groups`](#группы-и-столбцы) | [`Group[]`](#group) | -            | Объект с данными для описания групп значений и данных в них |
+| [`gridTicks`](#сетка) | `number` | -            | Количество делений на графике |
+| [`valuesTicks`](#сетка) | `number` | -            | Формат подписей к делениям |
+| [`unit?`](#единицы-измерения) | `string` | -            | Единицы измерения |
+| [`unitPosition?`](#единицы-измерения) | `left`, `bottom`, `left-and-bottom`, `none`| -   | Где показывать единицы измерения |
+| [`showValues?`](#значения-у-столбцов) | `boolean` | -            | Показывать значения величины столбцов |
+| [`isHorizontal`](#горизонтальный-или-вертикальный) | `boolean` | -            | Делает график горизонтальным |
+| [`align?`](#выравнивание) | `'start'`, `'end'`|  `'start'`           | Выравнивание столбцов |
+| [`threshold?`](#предельные-значения) | [`Threshold`](#threshold) | -            | Предельные значения |
+| [`formatValueForLabel?`](#формат-подписи-к-делениям) | `string` | -            | Формат подписей к делениям |
+| [`formatValueForTooltip?`](#тултип) | `string` | -            | Формат значений в тултипе |
+
+### Group
+
+Свойство          | Тип      | По умолчанию | Описание |
+| ----------------- | -------- | ------------ | -------- |
+| [`groupName`](#группы-и-столбцы) | `string` | -            | Название группы (видно на графике)  |
+| [`values`](#группы-и-столбцы) | `string` | -            | Объект с описанием столбца |
+| [`backgroundValues`](#группы-и-столбцы) | `string` | -            | Объект с описанием фона |
+| [`isDisabled`](#выделить-группу) | `string` | -            | Выделяет группу (делает фон бледнее) |
+
+
+### Threshold
+
+  Свойство          | Тип      | По умолчанию | Описание |
+ | ----------------- | -------- | ------------ | -------- |
+ | [`value`](#предельные-значения) | `number` | -       | Значение |
+ | [`color`](#предельные-значения) | `string` | -        | Цвет |
+
+## Пример
 
 ```tsx
 export const SimpleExample = () => (
